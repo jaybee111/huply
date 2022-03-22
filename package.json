@@ -1,7 +1,7 @@
 {
   "name": "huply",
   "description": "A dependency-free JavaScript-Tool for uploading files.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "files": [
     "dist"
   ],
