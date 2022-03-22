@@ -24,9 +24,21 @@ Recommended step for projects with integrated module bundler (e.g. Webpack) or t
 1. Add ``lang`` - Attribute to html-Tag. Otherwise english or the defined fallback language is used as default language.
    ``<html lang="en">``
 
-2. Execute init-function:
+2. Add input field
+
 ````
-new Huply().init();
+ <input
+   accept=".jpeg,.jpg,.png"
+   multiple
+   class="huply-test"
+ />
+````
+
+3. Execute init-function:
+
+````
+const el = document.querySelector('.huply-test');
+new Huply(el).init();
 ````
 
 ## Configuration
@@ -73,7 +85,7 @@ Every Huply-Instance can be modified by parameters:
      allowedFileTypes: ['.jpeg', '.png', '.jpg'],
      chunkSize: 5
  };
- new Huply(options).init();
+ new Huply(el, options).init();
 ```
 
 #### dropzoneTheme
@@ -86,7 +98,7 @@ const options = {
   dropzoneTheme: 'sm',
   ...
 };
-new Huply(options).init();
+new Huply(el, options).init();
 ```
 
 #### maxConcurrentUploads
@@ -99,7 +111,7 @@ const options = {
   maxConcurrentUploads: 3,
   ...
 };
-new Huply(options).init();
+new Huply(el, options).init();
 ```
 
 #### maxFileSize
@@ -112,7 +124,7 @@ const options = {
   maxFileSize: 3,
   ...
 };
-new Huply(options).init();
+new Huply(el, options).init();
 ```
 
 #### uploadUrl
@@ -125,7 +137,7 @@ const options = {
   uploadUrl: 'https://my-backend.url/upload',
   ...
 };
-new Huply(options).init();
+new Huply(el, options).init();
 ```
 
 #### deleteUrl
@@ -138,7 +150,7 @@ const options = {
   deleteUrl: 'https://my-backend.url/upload/{{filename}},
   ...
 };
-new Huply(options).init();
+new Huply(el, options).init();
 ```
 
 #### headers
@@ -153,7 +165,7 @@ const options = {
   },
   ...
 };
-new Huply(options).init();
+new Huply(el, options).init();
 ```
 
 #### preloadedFiles
@@ -177,7 +189,7 @@ const options = {
   ],
   ...
 };
-new Huply(options).init();
+new Huply(el, options).init();
 ```
 
 #### allowedFileTypes
@@ -188,7 +200,7 @@ const options = {
   allowedFileTypes: ['.jpg', '.jpeg', '.png'],
   ...
 };
-new Huply(options).init();
+new Huply(el, options).init();
 ```
 
 #### chunkSize
@@ -202,7 +214,7 @@ const options = {
   chunkSize: 3,
   ...
 };
-new Huply(options).init();
+new Huply(el, options).init();
 ```
 
 ### Data-attributes
@@ -225,6 +237,12 @@ It is also possible to add parameters as data-attributes:
    data-preloaded-files='[{"url":"https://cdn.pixabay.com/photo/2022/03/06/05/30/clouds-7050884_960_720.jpg","name":"test.jpg"},{"url":"https://cdn.pixabay.com/photo/2021/12/27/14/39/tulips-6897351_960_720.jpg","name":"test2.jpg"},{"url":"https://cdn.pixabay.com/photo/2020/03/26/10/58/norway-4970080_960_720.jpg","name":"test3.jpg"}]'
    data-chunk-size="3"
  />
+```
+
+and initialize it:
+
+```
+new Huply(el).init();
 ```
 
 ## Translation
@@ -258,7 +276,7 @@ If you need additional functionality, you can subscribe to events published by h
 A file was added.
 
 ```
-const huply = new Huply().init();
+const huply = new Huply(el).init();
 huply.on('fileAdded', function(fileItem) {
    
 });
@@ -269,7 +287,7 @@ huply.on('fileAdded', function(fileItem) {
 A file was uploaded.
 
 ```
-const huply = new Huply().init();
+const huply = new Huply(el).init();
 huply.on('fileUploaded', function(fileItem) {
    
 });
@@ -280,7 +298,7 @@ huply.on('fileUploaded', function(fileItem) {
 All files were uploaded.
 
 ```
-const huply = new Huply().init();
+const huply = new Huply(el).init();
 huply.on('filesUploaded', function() {
    
 });
@@ -291,7 +309,7 @@ huply.on('filesUploaded', function() {
 A file was deleted.
 
 ```
-const huply = new Huply().init();
+const huply = new Huply(el).init();
 huply.on('fileDeleted', function(fileItem) {
    
 });
@@ -302,7 +320,7 @@ huply.on('fileDeleted', function(fileItem) {
 Status of added file changed.
 
 ```
-const huply = new Huply().init();
+const huply = new Huply(el).init();
 huply.on('fileDeleted', function(fileItem) {
    
 });
