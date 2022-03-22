@@ -1,4 +1,4 @@
-import Hhuply from '../src/main.js';
+import Huply from '../src/main.js';
 
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
         ]
     };
-    const huplyInstance = new Hhuply(el, options).init();
+    const huplyInstance = new Huply(el, options).init();
     huplyInstance.on('fileUploaded', (fileItem) => {
        console.log('fileUploaded', fileItem);
     });
@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
         ]
     };
-    const huplyInstance2 = new Hhuply(el2, options2).init();
+    const huplyInstance2 = new Huply(el2, options2).init();
 
     const el3 = document.querySelector('.huply-test3');
     const options3 = {
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
         ]
     };
-    const huplyInstance3 = new Hhuply(el3, options3).init();
+    const huplyInstance3 = new Huply(el3, options3).init();
 
     const el4 = document.querySelector('.huply-test4');
     const options4 = {
@@ -87,14 +87,14 @@ document.addEventListener('DOMContentLoaded', function () {
             },
         ]
     };
-    const huplyInstance4 = new Hhuply(el4, options4).init();
+    const huplyInstance4 = new Huply(el4, options4).init();
 
     const el5 = document.querySelector('.huply-test5');
     el5.setAttribute('headers',JSON.stringify({
         "x-api-key": "123456789"
     }));
 
-    const huplyInstance5 = new Hhuply(el5).init();
+    const huplyInstance5 = new Huply(el5).init();
 
 
 });

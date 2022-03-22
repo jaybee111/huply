@@ -1,4 +1,4 @@
-# Hhuply
+# Huply
 A dependency-free file uploader
 
 ## Table of contents
@@ -16,7 +16,7 @@ A dependency-free file uploader
 ### Installation via npm
 Recommended step for projects with integrated module bundler (e.g. Webpack) or task-runner (e.g. Gulp).
 1. ``npm install huply --save``
-2. Integrate it via the import statement ``import Hhuply from 'huply'``
+2. Integrate it via the import statement ``import Huply from 'huply'``
 3. Import ``[PATH_TO_NODE_MODULES]/huply/dist/style.css`` to your stylesheets / workflow
 
 ## Usage
@@ -26,12 +26,12 @@ Recommended step for projects with integrated module bundler (e.g. Webpack) or t
 
 2. Execute init-function to your JavaScript-File:
 ````
-new Hhuply().init();
+new Huply().init();
 ````
 
 ## Configuration
 
-Every Hhuply-Instance can be modified by parameters:
+Every Huply-Instance can be modified by parameters:
 
 | Parameter                 | Required | Type                         |
 |---------------------------|----------|------------------------------|
@@ -73,7 +73,7 @@ Every Hhuply-Instance can be modified by parameters:
      allowedFileTypes: ['.jpeg', '.png', '.jpg'],
      chunkSize: 5
  };
- new Hhuply(options).init();
+ new Huply(options).init();
 ```
 
 #### dropzoneTheme
@@ -86,7 +86,7 @@ const options = {
   dropzoneTheme: 'sm',
   ...
 };
-new Hhuply(options).init();
+new Huply(options).init();
 ```
 
 #### maxConcurrentUploads
@@ -99,7 +99,7 @@ const options = {
   maxConcurrentUploads: 3,
   ...
 };
-new Hhuply(options).init();
+new Huply(options).init();
 ```
 
 #### maxFileSize
@@ -112,12 +112,12 @@ const options = {
   maxFileSize: 3,
   ...
 };
-new Hhuply(options).init();
+new Huply(options).init();
 ```
 
 #### uploadUrl
 
-Hhuply sends files to this url by **POST**-Method
+Huply sends files to this url by **POST**-Method
 
 ```
 const options = {
@@ -125,12 +125,12 @@ const options = {
   uploadUrl: 'https://my-backend.url/upload',
   ...
 };
-new Hhuply(options).init();
+new Huply(options).init();
 ```
 
 #### deleteUrl
 
-Hhuply sends a request to delete a temporary uploaded file. Request is sent by **DELETE**-Method. The placeholder **{{filename}}** is required and will be replaced with the filename.
+Huply sends a request to delete a temporary uploaded file. Request is sent by **DELETE**-Method. The placeholder **{{filename}}** is required and will be replaced with the filename.
 
 ```
 const options = {
@@ -138,7 +138,7 @@ const options = {
   deleteUrl: 'https://my-backend.url/upload/{{filename}},
   ...
 };
-new Hhuply(options).init();
+new Huply(options).init();
 ```
 
 #### headers
@@ -153,7 +153,7 @@ const options = {
   },
   ...
 };
-new Hhuply(options).init();
+new Huply(options).init();
 ```
 
 #### preloadedFiles
@@ -177,7 +177,7 @@ const options = {
   ],
   ...
 };
-new Hhuply(options).init();
+new Huply(options).init();
 ```
 
 #### allowedFileTypes
@@ -188,7 +188,7 @@ const options = {
   allowedFileTypes: ['.jpg', '.jpeg', '.png'],
   ...
 };
-new Hhuply(options).init();
+new Huply(options).init();
 ```
 
 #### chunkSize
@@ -202,7 +202,7 @@ const options = {
   chunkSize: 3,
   ...
 };
-new Hhuply(options).init();
+new Huply(options).init();
 ```
 
 ### Data-attributes
@@ -258,7 +258,7 @@ If you need additional functionality, you can subscribe to events published by h
 A file was added.
 
 ```
-const huply = new Hhuply().init();
+const huply = new Huply().init();
 huply.on('fileAdded', function(fileItem) {
    
 });
@@ -269,7 +269,7 @@ huply.on('fileAdded', function(fileItem) {
 A file was uploaded.
 
 ```
-const huply = new Hhuply().init();
+const huply = new Huply().init();
 huply.on('fileUploaded', function(fileItem) {
    
 });
@@ -280,7 +280,7 @@ huply.on('fileUploaded', function(fileItem) {
 All files were uploaded.
 
 ```
-const huply = new Hhuply().init();
+const huply = new Huply().init();
 huply.on('filesUploaded', function() {
    
 });
@@ -291,7 +291,7 @@ huply.on('filesUploaded', function() {
 A file was deleted.
 
 ```
-const huply = new Hhuply().init();
+const huply = new Huply().init();
 huply.on('fileDeleted', function(fileItem) {
    
 });
@@ -302,7 +302,7 @@ huply.on('fileDeleted', function(fileItem) {
 Status of added file changed.
 
 ```
-const huply = new Hhuply().init();
+const huply = new Huply().init();
 huply.on('fileDeleted', function(fileItem) {
    
 });

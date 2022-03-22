@@ -10,7 +10,7 @@ import FileService from "./services/FileService";
 declare let window: CustomWindowInterface;
 
 // eslint-disable-next-line no-unused-vars
-export default class Hhuply {
+export default class Huply {
 
     public options?: HuplyOptionsInterface;
     public el: HTMLElement | null;
