@@ -1,0 +1,119 @@
+.huply-dropzone {
+  height: 200px;
+  width: 100%;
+  background: var(--huply-gray-100);
+  border:1px solid  var(--huply-gray-400);
+  border-radius: var(--huply-border-radius);
+  transition: all 100ms ease-in;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+
+  &-desc {
+    text-align: center;
+  }
+
+  &-headline {
+    margin: 0 0 5px;
+  }
+
+  &-subline {
+    margin: 0 0 5px;
+  }
+
+  &-icon-upload {
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    background: var(--huply-primary-color);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:0 auto 5px auto;
+
+    svg {
+      width: 25px;
+
+      path {
+        fill: #fff;
+      }
+    }
+  }
+
+  &:hover {
+    border-color: var(--huply-primary-color);
+    background: var(--huply-gray-200);
+    cursor: pointer;
+  }
+
+  &.is-invalid {
+    border-color: var(--huply-danger-color);
+  }
+
+  &.is-dragover {
+    border-color: var(--huply-primary-color);
+    background: var(--huply-gray-100);
+  }
+
+  &-desc {
+    &.is-error {
+
+      .huply-dropzone-subline {
+        color:var(--huply-danger-color);
+      }
+
+      .huply-dropzone-icon-upload {
+        background:var(--huply-danger-color);
+      }
+    }
+
+    &.is-uploading {
+      svg {
+        animation:spin 1s linear infinite;
+      }
+    }
+
+    &.is-uploaded {
+      .huply-dropzone-subline {
+        color:var(--huply-success-color);
+      }
+
+      .huply-dropzone-icon-upload {
+        background:var(--huply-success-color);
+      }
+    }
+
+    &.is-preloaded {
+      .huply-dropzone-subline {
+        color:var(--huply-gray-500);
+      }
+    }
+  }
+
+  &-icon-delete {
+    position: absolute;
+    top:0;
+    right:0;
+    z-index: 2;
+    height:40px;
+    width:40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.is-hidden {
+      display: none;
+    }
+
+    svg {
+      width:15px;
+      path {
+        fill: var(--huply-danger-color)
+      }
+    }
+  }
+}

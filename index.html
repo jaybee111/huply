@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+  <style>
+    body {
+      font-family: Arial;
+    }
+  </style>
+</head>
+<body>
+<div style="max-width:1000px; margin: 0 auto;">
+  <div style="margin:0 0 50px;">
+    <h2>Multiple upload / large dropzone</h2>
+    <input multiple class="huply-test" name="huply-test" type="file" />
+  </div>
+
+  <div style="margin:0 0 50px;">
+    <h2>Single upload / large dropzone</h2>
+    <input class="huply-test2" name="huply-test2" type="file" />
+  </div>
+
+  <div style="margin:0 0 50px;">
+    <h2>Multiple upload / small dropzone</h2>
+    <input multiple class="huply-test3" name="huply-test3" type="file" />
+  </div>
+
+  <div style="margin:0 0 50px;">
+    <h2>Single upload / small dropzone</h2>
+    <input class="huply-test4" name="huply-test4" type="file" />
+  </div>
+
+  <div style="margin:0 0 50px;">
+    <h2>Multiple upload / small dropzone / data-attributes</h2>
+    <input
+            class="huply-test5"
+            name="huply-test5"
+            type="file"
+            accept=".jpeg,.jpg,.png"
+            multiple
+            data-dropzone-theme="sm"
+            data-max-concurrent-uploads="2"
+            data-max-file-size="5"
+            data-max-files="3"
+            data-upload-url="http://huply-be.loc/api/upload"
+            data-delete-url="http://huply-be.loc/api/upload/{{filename}}"
+            data-preloaded-files='[{"url":"https://cdn.pixabay.com/photo/2022/03/06/05/30/clouds-7050884_960_720.jpg","name":"test.jpg"},{"url":"https://cdn.pixabay.com/photo/2021/12/27/14/39/tulips-6897351_960_720.jpg","name":"test2.jpg"},{"url":"https://cdn.pixabay.com/photo/2020/03/26/10/58/norway-4970080_960_720.jpg","name":"test3.jpg"}]'
+            data-lang="de"
+            data-chunk-size="3"
+    />
+  </div>
+
+</div>
+<script type="module" src="/src/main.ts"></script>
+<script type="module" src="/tests/huply.ts"></script>
+</body>
+</html>
