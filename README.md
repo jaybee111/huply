@@ -24,7 +24,7 @@ Recommended step for projects with integrated module bundler (e.g. Webpack) or t
 1. Add ``lang`` - Attribute to html-Tag. Otherwise english or the defined fallback language is used as default language.
    ``<html lang="en">``
 
-2. Execute init-function to your JavaScript-File:
+2. Execute init-function:
 ````
 new Huply().init();
 ````
