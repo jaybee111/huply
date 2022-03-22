@@ -75,6 +75,7 @@ class UploadService {
 
     public function deleteUploadedFile($filename): \Illuminate\Http\JsonResponse
     {
+        $filename = basename($filename);
         if (Storage::disk($this->settings['disk'])->exists($this->settings['base_path'].$filename)) {
             Storage::disk($this->settings['disk'])->delete($this->settings['base_path'].$filename);
         }
