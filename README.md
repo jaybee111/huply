@@ -45,18 +45,19 @@ new Huply(el).init();
 
 Every Huply-Instance can be modified by parameters:
 
-| Parameter                 | Required | Type                         |
-|---------------------------|----------|------------------------------|
-| dropzoneTheme     | false    | string                       |
+| Parameter            | Required | Type                         |
+|----------------------|----------|------------------------------|
+| dropzoneTheme        | false    | string                       |
 | maxConcurrentUploads | false    | number                       |
-| maxFileSize | false    | number                       |
-| uploadUrl | true     | string                       |
-| deleteUrl | true     | string                       |  
-| headers | false | object                       |  
-| preloadedFiles | false | PreloadedFileItemInterface[] |  
-| translations | false | object                       |  
-| allowedFileTypes | false | string[]                     |
-| chunkSize | false |  number |
+| maxFileSize          | false    | number                       |
+| uploadUrl            | true     | string                       |
+| deleteUrl            | true     | string                       |  
+| headers              | false | object                       |  
+| withCredentials      | false | boolean                      |  
+| preloadedFiles       | false | PreloadedFileItemInterface[] |  
+| translations         | false | object                       |  
+| allowedFileTypes     | false | string[]                     |
+| chunkSize            | false | number                       |
 
 ```
  const options = {
@@ -163,6 +164,19 @@ const options = {
   headers: {
    'X-API-KEY' : '123456789'
   },
+  ...
+};
+new Huply(el, options).init();
+```
+
+#### withCredentials
+
+Add ``withCredentials`` to request.
+
+```
+const options = {
+  ...
+  withCredentials : true
   ...
 };
 new Huply(el, options).init();

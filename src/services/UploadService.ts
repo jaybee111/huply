@@ -28,12 +28,14 @@ export default class UploadService {
     }
 
     sendChunkedFile(fileItem: FileItemInterface, start: number) {
+
         if(this.store.options.chunkSize && fileItem.size && fileItem.data) {
             // Slicing file
-            const sliceSize = this.store.options.chunkSize * 1024;
+            const sliceSize = this.store.options.chunkSize * 1000 * 1024;
             const sliceEnd = start + sliceSize;
             const chunkEnd = Math.min(sliceEnd , fileItem.size);
             const chunk = fileItem.data.slice(start, chunkEnd);
+            const nextSlice = sliceEnd+1;
 
             // Check if upload is complete
             let request = new HttpRequestService(this.store).request('POST', this.store.options.uploadUrl);
@@ -61,7 +63,7 @@ export default class UploadService {
                         this.upload();
                     } else {
                         this.store.updateFileItem(fileItem);
-                        this.sendChunkedFile(fileItem, sliceEnd + 1);
+                        this.sendChunkedFile(fileItem, nextSlice);
                     }
 
                 } else {

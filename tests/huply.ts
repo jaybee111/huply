@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const options = {
         uploadUrl: 'http://huply-be.loc/api/upload',
         deleteUrl: 'http://huply-be.loc/api/upload/{{filename}}',
-        chunkSize: 5000,
+        chunkSize: 5,
         maxFileSize: 50,
         preloadedFiles: [
             {
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
         uploadUrl: 'http://huply-be.loc/api/upload',
         deleteUrl: 'http://huply-be.loc/api/upload/{{filename}}',
         maxFiles: 1,
-        chunkSize: 5000,
+        chunkSize: 5,
         maxFileSize: 50,
         preloadedFiles: [
             {
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
         uploadUrl: 'http://huply-be.loc/api/upload',
         deleteUrl: 'http://huply-be.loc/api/upload/{{filename}}',
         dropzoneTheme: 'sm',
-        chunkSize: 5000,
+        chunkSize: 5,
         maxFileSize: 50,
         preloadedFiles: [
             {
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
         deleteUrl: 'http://huply-be.loc/api/upload/{{filename}}',
         dropzoneTheme: 'sm',
         maxFiles: 1,
-        chunkSize: 5000,
+        chunkSize: 5,
         maxFileSize: 50,
         preloadedFiles: [
             {

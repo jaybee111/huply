@@ -10,7 +10,9 @@ export default class HttpRequestService {
 
     request(method: string, url: string): XMLHttpRequest {
         let request = new XMLHttpRequest();
-        request.withCredentials = true;
+        if(this.store.options.withCredentials) {
+            request.withCredentials = this.store.options.withCredentials;
+        }
         request.open(method, url);
         if(isObject(this.store.options.headers)) {
             // @ts-ignore

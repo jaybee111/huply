@@ -8,6 +8,7 @@ interface HuplyOptionsInterface {
     uploadUrl: string,
     deleteUrl?: string,
     headers?: object,
+    withCredentials: boolean,
     preloadedFiles?: PreloadedFileItemInterface[],
     lang?: string,
     translations?: object,
