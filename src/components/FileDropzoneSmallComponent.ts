@@ -4,6 +4,7 @@ import FileItemInterface from "../interfaces/FileItemInterface";
 import UploadService from "../services/UploadService";
 import FileValidationService from "../services/FileValidationService";
 import FileService from "../services/FileService";
+import {getHumanNumber} from "../helpers/OutputHelper";
 
 class FileDropzoneSmallComponent {
     private store: AppStore;
@@ -234,7 +235,7 @@ class FileDropzoneSmallComponent {
             } else if(fileItem.status === 'error') {
                 this.subline.innerHTML = fileItem.statusMsg ?? $t('fileItemStatusError');
             } else if(fileItem.status === 'uploaded' || fileItem.status === 'preloaded') {
-                this.subline.textContent = fileItem.sizeMb && fileItem.sizeMb < 1 ? `${fileItem.sizeKb} KB` : `${fileItem.sizeMb} MB`;
+                this.subline.textContent = fileItem.sizeMb && fileItem.sizeMb < 1 ? `${fileItem.sizeKb} KB` : `${getHumanNumber(fileItem.sizeMb)} MB`;
             } else {
                 this.subline.innerHTML = this.getSublineText();
             }

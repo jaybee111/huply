@@ -31,15 +31,14 @@ export default class UploadService {
 
         if(this.store.options.chunkSize && fileItem.size && fileItem.data) {
             // Slicing file
-            const sliceSize = this.store.options.chunkSize * 1000 * 1024;
+            const sliceSize = this.store.options.chunkSize * 1024 * 1024;
             const sliceEnd = start + sliceSize;
+            const nextSlice = sliceEnd + 1;
             const chunkEnd = Math.min(sliceEnd , fileItem.size);
-            const chunk = fileItem.data.slice(start, chunkEnd);
-            const nextSlice = sliceEnd+1;
+            const chunk = fileItem.data.slice(start, nextSlice);
 
             // Check if upload is complete
             let request = new HttpRequestService(this.store).request('POST', this.store.options.uploadUrl);
-            request.setRequestHeader('accept', 'application/json');
             const contentRange = "bytes "+ start+"-"+ chunkEnd+"/"+fileItem.size;
             request.setRequestHeader("Content-Range",contentRange);
 

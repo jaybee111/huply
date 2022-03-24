@@ -107,7 +107,7 @@ export default class Huply {
             lang: 'de',
             uploadUrl: '',
             deleteUrl: '',
-            allowedFileTypes: ['.jpg', '.jpeg', '.png', '.pdf'],
+            allowedFileTypes: ['.jpg', '.jpeg', '.png', '.pdf', '.zip', '.mp4'],
             dropzoneTheme: 'lg'
         };
 

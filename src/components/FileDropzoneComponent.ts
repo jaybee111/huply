@@ -97,9 +97,9 @@ class FileDropzoneComponent {
                                 fileItem.statusMsg = validationMsg.map((item) => item.msg).join(', ')
                                 this.store.updateFileItem(fileItem);
                             }
-                        });
 
-                        uploadService.upload();
+                            uploadService.upload();
+                        });
                     }
                 }
             }
