@@ -1,6 +1,6 @@
 import FileInputComponent from "./FileInputComponent";
 import FileListComponent from "./FileListComponent";
-import FileDropzoneComponent from "./FileDropzoneComponent";
+import FileDropzoneLgComponent from "./FileDropzoneLgComponent";
 import FileDropzoneSmallComponent from "./FileDropzoneSmallComponent";
 import FileInputHiddenComponent from "./FileInputHiddenComponent";
 import AppStore from "../store/AppStore";
@@ -33,7 +33,7 @@ class WrapperComponent {
             dropzoneComponent = new FileDropzoneSmallComponent(this.store);
             wrapper.appendChild(dropzoneComponent.render());
         } else {
-            dropzoneComponent = new FileDropzoneComponent(this.store);
+            dropzoneComponent = new FileDropzoneLgComponent(this.store);
             wrapper.appendChild(dropzoneComponent.render());
         }
 
