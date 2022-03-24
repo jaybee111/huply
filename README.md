@@ -28,6 +28,7 @@ Recommended step for projects with integrated module bundler (e.g. Webpack) or t
 
 ````
  <input
+   type="file"
    accept=".jpeg,.jpg,.png"
    multiple
    class="huply-test"
@@ -233,7 +234,7 @@ new Huply(el, options).init();
 
 ### Data-attributes
 
-It is also possible to add parameters as data-attributes:
+Add parameters as data-attributes:
 
 ```
  <input
