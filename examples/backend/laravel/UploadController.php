@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Libraries\UploadLibrary;
 use App\Services\UploadService;
 use Illuminate\Http\Request;
 class UploadController extends Controller

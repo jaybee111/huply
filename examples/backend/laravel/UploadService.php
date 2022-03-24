@@ -45,18 +45,11 @@ class UploadService {
             $chunkStartSize = explode(' ', $contentRange[0])[1];
             list($chunkSizeUploaded, $fileSize) = explode('/', $contentRange[1]);
 
-            file_put_contents(
-                Storage::disk($this->settings['disk'])->path($this->settings['base_path'].'/'.$filenameWithExtChunked),
-                $this->request->file('file')->get(),
-                FILE_APPEND
-            );
-            /*
             if($chunkStartSize == 0) {
-                Storage::disk($this->settings['disk'])->put($this->settings['base_path'].'/'.$filenameWithExtChunked, $this->request->file('file'));
+                Storage::disk($this->settings['disk'])->put($this->settings['base_path'].'/'.$filenameWithExtChunked, $this->request->file('file')->get());
             } else {
-                Storage::disk($this->settings['disk'])->append($this->settings['base_path'].'/'.$filenameWithExtChunked, $this->request->file('file'));
+                Storage::disk($this->settings['disk'])->append($this->settings['base_path'].'/'.$filenameWithExtChunked, $this->request->file('file')->get(), null);
             }
-            */
 
             if ($chunkSizeUploaded === $fileSize) {
                 Storage::disk($this->settings['disk'])->move($this->settings['base_path'].'/'.$filenameWithExtChunked, $this->settings['base_path'].'/'.$filenameWithExt);
