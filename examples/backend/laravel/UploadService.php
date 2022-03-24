@@ -10,7 +10,9 @@ class UploadService {
 
     public function __construct(\Illuminate\Http\Request $request, $settings = []) {
         $this->request = $request;
+        $this->allowedFileTypes = 'jpeg,jpg,png,svg,doc,docx,pdf,mp4';
 
+        $request->user();
         $defaultSettings = [
             'base_path' => '',
             'disk' => 'local',
@@ -57,7 +59,7 @@ class UploadService {
 
         } else {
             $this->request->validate([
-                'file' => ['required','mimes:jpeg,jpg,png,pdf', 'max:'.$this->request->input('max_file_size')]
+                'file' => ['required','mimes:'.$this->allowedFileTypes, 'max:'.$this->request->input('max_file_size')]
             ]);
 
             $filenameWithExt = basename(Str::ascii($this->request->file('file')->getClientOriginalName()));
