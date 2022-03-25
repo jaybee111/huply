@@ -16,10 +16,7 @@ class UploadServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(UploadService::class, function ($app) {
-            return new UploadService(request(), [
-                'base_path' => '',
-                'disk' => 'local',
-            ]);
+            return new UploadService(request());
         });
     }
 

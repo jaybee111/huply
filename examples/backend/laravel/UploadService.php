@@ -1,41 +1,35 @@
 <?php
 namespace App\Services;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class UploadService {
     private $request;
-    private $settings;
+    private $allowedFileTypes;
 
-    public function __construct(\Illuminate\Http\Request $request, $settings = []) {
+    public function __construct(Request $request) {
         $this->request = $request;
         $this->allowedFileTypes = 'jpeg,jpg,png,svg,doc,docx,pdf,mp4';
-
-        $request->user();
-        $defaultSettings = [
-            'base_path' => '',
-            'disk' => 'local',
-        ];
-        $this->settings = array_merge($defaultSettings, $settings);
     }
 
-    public function processUpload(): \Illuminate\Http\JsonResponse
+    public function processUpload($attr): \Illuminate\Http\JsonResponse
     {
         if ($this->request->header('Content-Range')) {
             $this->request->validate([
-                'file' => ['required', 'max:'.$this->request->input('max_file_size')]
+                'file' => ['required','mimes:'.$this->allowedFileTypes, 'max:'.$this->request->input('max_file_size')]
             ]);
 
             if(
-                strlen($this->settings['base_path']) &&
-                !Storage::disk($this->settings['disk'])->exists($this->settings['base_path'])
+                !empty($attr['base_path']) &&
+                !Storage::disk($attr['disk'])->exists($attr['base_path'])
             ) {
-                Storage::disk($this->settings['disk'])->makeDirectory($this->settings['base_path']);
+                Storage::disk($attr['disk'])->makeDirectory($attr['base_path']);
             }
 
             $filenameWithExt = basename(Str::ascii($this->request->file('file')->getClientOriginalName()));
-            if (Storage::disk($this->settings['disk'])->exists($this->settings['base_path'].'/'.$filenameWithExt)) {
+            if (Storage::disk($attr['disk'])->exists($attr['base_path'].'/'.$filenameWithExt)) {
                 $pathParts = pathinfo($filenameWithExt);
                 if (!empty($pathParts['filename']) && !empty($pathParts['extension'])) {
                     $filenameWithExt = $pathParts['filename'].'_'.uniqid().'.'.$pathParts['extension'];
@@ -48,13 +42,13 @@ class UploadService {
             list($chunkSizeUploaded, $fileSize) = explode('/', $contentRange[1]);
 
             if($chunkStartSize == 0) {
-                Storage::disk($this->settings['disk'])->put($this->settings['base_path'].'/'.$filenameWithExtChunked, $this->request->file('file')->get());
+                Storage::disk($attr['disk'])->put($attr['base_path'].'/'.$filenameWithExtChunked, $this->request->file('file')->get());
             } else {
-                Storage::disk($this->settings['disk'])->append($this->settings['base_path'].'/'.$filenameWithExtChunked, $this->request->file('file')->get(), null);
+                Storage::disk($attr['disk'])->append($attr['base_path'].'/'.$filenameWithExtChunked, $this->request->file('file')->get(), null);
             }
 
             if ($chunkSizeUploaded === $fileSize) {
-                Storage::disk($this->settings['disk'])->move($this->settings['base_path'].'/'.$filenameWithExtChunked, $this->settings['base_path'].'/'.$filenameWithExt);
+                Storage::disk($attr['disk'])->move($attr['base_path'].'/'.$filenameWithExtChunked, $attr['base_path'].'/'.$filenameWithExt);
             }
 
         } else {
@@ -64,23 +58,23 @@ class UploadService {
 
             $filenameWithExt = basename(Str::ascii($this->request->file('file')->getClientOriginalName()));
 
-            if (Storage::disk($this->settings['disk'])->exists($this->settings['base_path'].'/'.$filenameWithExt)) {
+            if (Storage::disk($attr['disk'])->exists($attr['base_path'].'/'.$filenameWithExt)) {
                 $pathParts = pathinfo($filenameWithExt);
                 if (!empty($pathParts['filename']) && !empty($pathParts['extension'])) {
                     $filenameWithExt = $pathParts['filename'].'_'.uniqid().'.'.$pathParts['extension'];
                 }
             }
-            $this->request->file('file')->storeAs($this->settings['base_path'],$filenameWithExt, $this->settings['disk']);
+            $this->request->file('file')->storeAs($attr['base_path'],$filenameWithExt, $attr['disk']);
         }
 
         return response()->json(['filename' => $filenameWithExt]);
     }
 
-    public function deleteUploadedFile($filename): \Illuminate\Http\JsonResponse
+    public function deleteUploadedFile($attr): \Illuminate\Http\JsonResponse
     {
-        $filename = basename($filename);
-        if (Storage::disk($this->settings['disk'])->exists($this->settings['base_path'].'/'.$filename)) {
-            Storage::disk($this->settings['disk'])->delete($this->settings['base_path'].'/'.$filename);
+        $filename = basename(urldecode($attr['filename']));
+        if (Storage::disk($attr['disk'])->exists($attr['base_path'].'/'.$filename)) {
+            Storage::disk($attr['disk'])->delete($attr['base_path'].'/'.$filename);
         }
 
         return response()->json();

@@ -3,22 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Services\UploadService;
-use Illuminate\Http\Request;
+
 class UploadController extends Controller
 {
     private $uploadService;
 
-    public function __construct(Request $request, UploadService $uploadService) {
+    public function __construct(UploadService $uploadService) {
         $this->uploadService = $uploadService;
     }
 
-    public function index(Request $request): \Illuminate\Http\JsonResponse
+    public function index(): \Illuminate\Http\JsonResponse
     {
-        return $this->uploadService->processUpload();
+        $attr = [
+            'base_path' => '',
+            'disk' => 'local',
+        ];
+        return $this->uploadService->processUpload($attr);
     }
 
-    public function delete($filename, Request $request): \Illuminate\Http\JsonResponse
+    public function delete($filename): \Illuminate\Http\JsonResponse
     {
-        return $this->uploadService->deleteUploadedFile(urldecode($filename));
+        $attr = [
+            'base_path' => '',
+            'disk' => 'local',
+            'filename' => $filename
+        ];
+        return $this->uploadService->deleteUploadedFile($attr);
     }
 }
