@@ -98,7 +98,11 @@ class FileListComponent {
             } else if (fileItem.status === 'error') {
                 sublineEl.textContent = fileItem.statusMsg ?? $t('fileItemStatusError');
             } else if (fileItem.status === 'uploaded' || fileItem.status === 'preloaded') {
-                sublineEl.textContent = fileItem.sizeMb && fileItem.sizeMb < 1 ? `${fileItem.sizeKb} KB` : `${getHumanNumber(fileItem.sizeMb)} MB`;
+                if(fileItem.size && fileItem.size > 0) {
+                    sublineEl.textContent = fileItem.sizeMb && fileItem.sizeMb < 1 ? `${fileItem.sizeKb} KB` : `${getHumanNumber(fileItem.sizeMb)} MB`;
+                } else {
+                    sublineEl.innerHTML = '&nbsp;';
+                }
             }
         }
     }

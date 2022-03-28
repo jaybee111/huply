@@ -232,7 +232,11 @@ class FileDropzoneComponent {
             } else if(fileItem.status === 'error') {
                 this.subline.innerHTML = fileItem.statusMsg ?? $t('fileItemStatusError');
             } else if(fileItem.status === 'uploaded' || fileItem.status === 'preloaded') {
-                this.subline.textContent = fileItem.sizeMb && fileItem.sizeMb < 1 ? `${fileItem.sizeKb} KB` : `${getHumanNumber(fileItem.sizeMb)} MB`;
+                if(fileItem.size && fileItem.size > 0) {
+                    this.subline.textContent = fileItem.sizeMb && fileItem.sizeMb < 1 ? `${fileItem.sizeKb} KB` : `${getHumanNumber(fileItem.sizeMb)} MB`;
+                } else {
+                    this.subline.innerHTML = '&nbsp;';
+                }
             } else {
                 this.subline.innerHTML = this.getSublineText();
             }

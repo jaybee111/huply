@@ -88,8 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
         preloadedFiles: [
             {
                 url: 'https://cdn.pixabay.com/photo/2022/03/06/05/30/clouds-7050884_960_720.jpg',
-                name: 'test.jpg',
-                size: 1500600
+                name: 'test.jpg'
             },
         ]
     };
