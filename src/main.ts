@@ -148,8 +148,7 @@ export default class Huply {
         const preloadedFiles = this.el?.getAttribute('data-preloaded-files');
         if(preloadedFiles) {
             try {
-                // const decodedFiles = atob(preloadedFiles);
-                const decodedFiles = atob('W3sibmFtZSI6InRlc3QuanBnIn1d');
+                const decodedFiles = atob(preloadedFiles);
                 defaultOptions.preloadedFiles = JSON.parse(decodedFiles);
             } catch {
                 defaultOptions.preloadedFiles = [];
