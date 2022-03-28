@@ -89,16 +89,16 @@ class FileListComponent {
     }
 
     updateSubline(fileItem: FileItemInterface) {
-        const subline = this.listElement.querySelector('.huply-file-item-subline');
-        if (subline) {
+        const sublineEl = this.listElement.querySelector('.huply-file-item-subline');
+        if (sublineEl) {
             if (fileItem.status === 'uploading') {
                 if (fileItem.uploadProcess) {
-                    subline.textContent = $t('fileItemStatusUploading') + ' (' + fileItem.uploadProcess.toFixed(0) + '%)';
+                    sublineEl.textContent = $t('fileItemStatusUploading') + ' (' + fileItem.uploadProcess.toFixed(0) + '%)';
                 }
             } else if (fileItem.status === 'error') {
-                subline.textContent = fileItem.statusMsg ?? $t('fileItemStatusError');
+                sublineEl.textContent = fileItem.statusMsg ?? $t('fileItemStatusError');
             } else if (fileItem.status === 'uploaded' || fileItem.status === 'preloaded') {
-                subline.textContent = fileItem.sizeMb && fileItem.sizeMb < 1 ? `${fileItem.sizeKb} KB` : `${getHumanNumber(fileItem.sizeMb)} MB`;
+                sublineEl.textContent = fileItem.sizeMb && fileItem.sizeMb < 1 ? `${fileItem.sizeKb} KB` : `${getHumanNumber(fileItem.sizeMb)} MB`;
             }
         }
     }

@@ -11,15 +11,18 @@ document.addEventListener('DOMContentLoaded', function () {
         preloadedFiles: [
             {
                 url: 'https://cdn.pixabay.com/photo/2022/03/06/05/30/clouds-7050884_960_720.jpg',
-                name: 'test.jpg'
+                name: 'test.jpg',
+                size: 2000000
             },
             {
                 url: 'https://cdn.pixabay.com/photo/2021/12/27/14/39/tulips-6897351_960_720.jpg',
-                name: 'test2.jpg'
+                name: 'test2.jpg',
+                size: 1000000
             },
             {
                 url: 'https://cdn.pixabay.com/photo/2020/03/26/10/58/norway-4970080_960_720.jpg',
-                name: 'test3.jpg'
+                name: 'test3.jpg',
+                size: 1500600
             },
         ]
     };
@@ -50,7 +53,8 @@ document.addEventListener('DOMContentLoaded', function () {
         preloadedFiles: [
             {
                 url: 'https://cdn.pixabay.com/photo/2022/03/06/05/30/clouds-7050884_960_720.jpg',
-                name: 'test.jpg'
+                name: 'test.jpg',
+                size: 1500600
             },
         ]
     };
@@ -66,7 +70,8 @@ document.addEventListener('DOMContentLoaded', function () {
         preloadedFiles: [
             {
                 url: 'https://cdn.pixabay.com/photo/2022/03/06/05/30/clouds-7050884_960_720.jpg',
-                name: 'test.jpg'
+                name: 'test.jpg',
+                size: 1500600
             },
         ]
     };
@@ -83,7 +88,8 @@ document.addEventListener('DOMContentLoaded', function () {
         preloadedFiles: [
             {
                 url: 'https://cdn.pixabay.com/photo/2022/03/06/05/30/clouds-7050884_960_720.jpg',
-                name: 'test.jpg'
+                name: 'test.jpg',
+                size: 1500600
             },
         ]
     };

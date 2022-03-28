@@ -85,7 +85,7 @@ class FileDropzoneComponent {
                             // Validate file
                             const validationService = new FileValidationService(this.store);
                             const validationMsg = validationService.isValidFile(item);
-                            new FileService(this.store).generateFileItem(item).then((fileItem) => {
+                            new FileService(this.store).generateFileItemFromFile(item).then((fileItem) => {
                                 this.store.addFileItem(fileItem);
 
                                 // Check for errors

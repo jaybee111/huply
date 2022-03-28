@@ -30,7 +30,7 @@ class FileInputComponent {
                     // Validate file
                     const validationService = new FileValidationService(store);
                     const validationMsg = validationService.isValidFile(item);
-                    new FileService(store).generateFileItem(item).then((fileItem) => {
+                    new FileService(store).generateFileItemFromFile(item).then((fileItem) => {
                         store.addFileItem(fileItem);
 
                         // Check for errors

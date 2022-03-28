@@ -185,21 +185,26 @@ new Huply(el, options).init();
 
 #### preloadedFiles
 
+Sets the preloaded files (e.g. from database). Size - Value in bytes.
+
 ```
 const options = {
   ...
   preloadedFiles: [
       {
           url: 'https://cdn.pixabay.com/photo/2022/03/06/05/30/clouds-7050884_960_720.jpg',
-          name: 'test.jpg'
+          name: 'test.jpg',
+          size: 20000000
       },
       {
           url: 'https://cdn.pixabay.com/photo/2021/12/27/14/39/tulips-6897351_960_720.jpg',
-          name: 'test2.jpg'
+          name: 'test2.jpg',
+          size: 10000000
       },
       {
-          url: 'data:application/octet-stream;base64, ...',
-          name: 'url-as-data-url.jpg'
+          url: 'data:image/jpeg;base64, ...',
+          name: 'url-as-data-url.jpg',
+          size: 10000000
       },
   ],
   ...
@@ -249,7 +254,7 @@ Add parameters as data-attributes:
    data-max-files="3"
    data-upload-url="http://huply-be.loc/api/upload"
    data-delete-url="http://huply-be.loc/api/upload/{{filename}}"
-   data-preloaded-files='[{"url":"https://cdn.pixabay.com/photo/2022/03/06/05/30/clouds-7050884_960_720.jpg","name":"test.jpg"},{"url":"https://cdn.pixabay.com/photo/2021/12/27/14/39/tulips-6897351_960_720.jpg","name":"test2.jpg"},{"url":"https://cdn.pixabay.com/photo/2020/03/26/10/58/norway-4970080_960_720.jpg","name":"test3.jpg"}]'
+   data-preloaded-files='base64-encoded string (Decoded: [{"url":"https://cdn.pixabay.com/photo/2022/03/06/05/30/clouds-7050884_960_720.jpg","name":"test.jpg"},{"url":"https://cdn.pixabay.com/photo/2021/12/27/14/39/tulips-6897351_960_720.jpg","name":"test2.jpg"},{"url":"https://cdn.pixabay.com/photo/2020/03/26/10/58/norway-4970080_960_720.jpg","name":"test3.jpg"}])'
    data-chunk-size="3"
  />
 ```

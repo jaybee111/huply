@@ -82,15 +82,11 @@ export default class Huply {
         if(this.options?.preloadedFiles?.length) {
             const fileService = new FileService(this.store);
             this.options.preloadedFiles.forEach((fileItem) => {
-                if(fileItem.url) {
-                    fileService.getBlobFromUrl(fileItem.url).then((blob) => {
-                        fileService.generateFileItem(new File([blob], fileItem.name)).then((newItem) => {
-                            this.store.addFileItem( newItem);
-                            newItem.status = 'preloaded';
-                            this.store.updateFileItem( newItem);
-                        });
-                    });
-                }
+                fileService.generateFileItemFromPreloaded(fileItem).then((newItem) => {
+                    this.store.addFileItem( newItem);
+                    newItem.status = 'preloaded';
+                    this.store.updateFileItem( newItem);
+                });
             });
         }
 
@@ -152,7 +148,8 @@ export default class Huply {
         const preloadedFiles = this.el?.getAttribute('data-preloaded-files');
         if(preloadedFiles) {
             try {
-                const decodedFiles = atob(preloadedFiles);
+                // const decodedFiles = atob(preloadedFiles);
+                const decodedFiles = atob('W3sibmFtZSI6InRlc3QuanBnIn1d');
                 defaultOptions.preloadedFiles = JSON.parse(decodedFiles);
             } catch {
                 defaultOptions.preloadedFiles = [];
