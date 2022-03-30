@@ -18,6 +18,12 @@ export default class Huply {
     public el: HTMLElement | null;
     private store: AppStore;
 
+    /**
+     * Parsing global options, initializing global app store and setting translations
+     *
+     * @param el
+     * @param options
+     */
     public constructor(el: HTMLElement, options?: HuplyOptionsInterface) {
         if(!isElement(el)) {
             throw new Error('Selected element is not type of "Element". Current type: '+ typeof el);
@@ -70,6 +76,9 @@ export default class Huply {
         return this;
     }
 
+    /**
+     * Initialize function for Huply
+     */
     public init() {
         // Render Layout
         // Replace input with wrapper
@@ -98,6 +107,12 @@ export default class Huply {
         return this;
     }
 
+    /**
+     * Subscription handler for events
+     *
+     * @param eventName
+     * @param listener
+     */
     public on(eventName: string, listener: any) {
         this.store.events.subscribe(eventName, listener);
     }
