@@ -8,6 +8,7 @@ A dependency-free file uploader
 - [Configuration](#configuration)
 - [Translation](#translation)
 - [Events](#events)
+- [Methods](#methods)
 - [Backends](#backends)
 - [License](#license)
 
@@ -344,6 +345,23 @@ const huply = new Huply(el).init();
 huply.on('fileDeleted', function(fileItem) {
    
 });
+```
+
+## Methods
+
+#### addFileItem
+
+Adds a file item to the preloaded file list. 
+
+```
+const huply = new Huply(el).init();
+const fileItem = {
+   name: 'test123.jpg',
+   size: 200000,
+   // https://test.xyz OR Data url (data:image/jpeg;base64,....) OR empty string
+   url: '' 
+}
+huply.addFileItem(fileItem);
 ```
 
 ## Backends

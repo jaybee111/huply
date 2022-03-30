@@ -8,6 +8,7 @@ import AppStore from "./store/AppStore";
 import { CustomWindowInterface } from "./interfaces/CustomWindowInterface";
 import FileService from "./services/FileService";
 import OptionsService from "./services/OptionsService";
+import PreloadedFileItemInterface from "./interfaces/PreloadedFileItemInterface";
 declare let window: CustomWindowInterface;
 
 // eslint-disable-next-line no-unused-vars
@@ -99,5 +100,18 @@ export default class Huply {
 
     public on(eventName: string, listener: any) {
         this.store.events.subscribe(eventName, listener);
+    }
+
+    /**
+     * Adds a new file item to preloaded file list
+     * @param fileItem
+     */
+    public addFileItem(fileItem: PreloadedFileItemInterface) {
+        const fileService = new FileService(this.store);
+        fileService.generateFileItemFromPreloaded(fileItem).then((newItem) => {
+            this.store.addFileItem( newItem);
+            newItem.status = 'preloaded';
+            this.store.updateFileItem( newItem);
+        });
     }
 }

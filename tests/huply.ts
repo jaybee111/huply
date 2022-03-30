@@ -101,5 +101,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const huplyInstance5 = new Huply(el5).init();
 
+    const el6 = document.querySelector('.huply-test6');
+    const options6 = {
+        uploadUrl: 'http://huply-be.loc/api/upload',
+        deleteUrl: 'http://huply-be.loc/api/upload/{{filename}}',
+    };
+    const huplyInstance6 = new Huply(el6, options6).init();
+    const fileItem = {
+        name: 'test123.jpg',
+        size: 200000,
+        url: ''
+    }
+    huplyInstance6.addFileItem(fileItem);
+
 
 });
