@@ -31,10 +31,12 @@ class FileInputHiddenComponent {
     getValue() {
         const categorizedFiles = this.store.getCategorizedFiles();
         categorizedFiles.uploaded = categorizedFiles.uploaded.map((fileItem) => {
+            fileItem.url = undefined;
             fileItem.data = undefined;
             return fileItem;
         });
         categorizedFiles.deleted = categorizedFiles.deleted.map((fileItem) => {
+            fileItem.url = undefined;
             fileItem.data = undefined;
             return fileItem;
         });
