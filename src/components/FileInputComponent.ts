@@ -10,7 +10,7 @@ class FileInputComponent {
         this.el = el.cloneNode(true) as HTMLInputElement;
 
         // Add default class to input
-        this.el.setAttribute('name', `${el.getAttribute('name')}_real'`);
+        this.el.setAttribute('name', `${el.getAttribute('name')}_real`);
 
         // Add default class to input
         this.el.classList.add('huply-input');
