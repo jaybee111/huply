@@ -53,13 +53,18 @@ Every Huply-Instance can be modified by parameters:
 | maxConcurrentUploads | false    | number                       |
 | maxFileSize          | false    | number                       |
 | uploadUrl            | true     | string                       |
-| deleteUrl            | true     | string                       |  
-| headers              | false | object                       |  
-| withCredentials      | false | boolean                      |  
-| preloadedFiles       | false | PreloadedFileItemInterface[] |  
-| translations         | false | object                       |  
-| allowedFileTypes     | false | string[]                     |
-| chunkSize            | false | number                       |
+| deleteUrl            | true     | string                       |
+| headers              | false    | object                       |
+| withCredentials      | false    | boolean                      |
+| preloadedFiles       | false    | PreloadedFileItemInterface[] |
+| lang                 | false    | string                       |
+| translations         | false    | object                       |
+| allowedFileTypes     | false    | string[]                     |
+| chunkSize            | false    | number                       |
+| chunkMinSize         | false    | number                       |
+| chunkRetries         | false    | number                       |
+| sortable             | false    | boolean                      |
+| fileListTheme        | false    | string                       |
 
 ```
  const options = {
@@ -224,6 +229,19 @@ const options = {
 new Huply(el, options).init();
 ```
 
+#### lang
+
+Sets the language for built-in translations. Supported values: `'de'` | `'en'`. Defaults to the `lang` attribute of the `<html>` element, or `'de'` as fallback.
+
+```
+const options = {
+  ...
+  lang: 'en',
+  ...
+};
+new Huply(el, options).init();
+```
+
 #### chunkSize
 
 If you need large file size uploads, huply slices the file into chunks. Chunk size in Megabytes (MB).
@@ -236,6 +254,74 @@ const options = {
   ...
 };
 new Huply(el, options).init();
+```
+
+#### chunkMinSize
+
+Minimum file size in Megabytes (MB) required to trigger chunked uploading. Files smaller than this threshold are uploaded in a single request even when `chunkSize` is set.
+
+```
+const options = {
+  ...
+  chunkSize: 5,
+  chunkMinSize: 2,
+  ...
+};
+new Huply(el, options).init();
+```
+
+#### chunkRetries
+
+Number of retry attempts for a failed chunk upload before the whole file is marked as errored.
+
+```
+const options = {
+  ...
+  chunkSize: 5,
+  chunkRetries: 3,
+  ...
+};
+new Huply(el, options).init();
+```
+
+#### sortable
+
+Enables drag-and-drop reordering of uploaded files in the file list. Only applicable when `multiple` is set to `true`. A drag handle appears on each file item that can be used to reorder the list. The new order is reflected in the internal store and published via the `filesReordered` event.
+
+```
+const options = {
+  ...
+  sortable: true,
+  ...
+};
+new Huply(el, options).init();
+```
+
+Can also be set via data-attribute:
+
+```
+<input type="file" multiple data-sortable="true" ... />
+```
+
+#### fileListTheme
+
+Sets the layout of the file list. Use `'gallery'` to display files as a square-thumbnail grid. On hover (and during upload) a semi-transparent overlay with a delete button and upload progress appears. Defaults to `'list'`.
+
+**Values:** `'list'` | `'gallery'`
+
+```
+const options = {
+  ...
+  fileListTheme: 'gallery',
+  ...
+};
+new Huply(el, options).init();
+```
+
+Can also be set via data-attribute:
+
+```
+<input type="file" multiple data-file-list-theme="gallery" ... />
 ```
 
 ### Data-attributes
@@ -257,6 +343,8 @@ Add parameters as data-attributes:
    data-delete-url="http://huply-be.loc/api/upload/{{filename}}"
    data-preloaded-files='base64-encoded string (Decoded: [{"url":"https://cdn.pixabay.com/photo/2022/03/06/05/30/clouds-7050884_960_720.jpg","name":"test.jpg"},{"url":"https://cdn.pixabay.com/photo/2021/12/27/14/39/tulips-6897351_960_720.jpg","name":"test2.jpg"},{"url":"https://cdn.pixabay.com/photo/2020/03/26/10/58/norway-4970080_960_720.jpg","name":"test3.jpg"}])'
    data-chunk-size="3"
+   data-sortable="true"
+   data-file-list-theme="gallery"
  />
 ```
 
@@ -342,8 +430,19 @@ Status of added file changed.
 
 ```
 const huply = new Huply(el).init();
-huply.on('fileDeleted', function(fileItem) {
-   
+huply.on('fileItemUpdate', function(fileItem) {
+
+});
+```
+
+#### filesReordered
+
+The file list was reordered via drag-and-drop (only fires when `sortable: true`).
+
+```
+const huply = new Huply(el).init();
+huply.on('filesReordered', function(files) {
+
 });
 ```
 

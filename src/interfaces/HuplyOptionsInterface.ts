@@ -13,7 +13,11 @@ interface HuplyOptionsInterface {
     lang?: string,
     translations?: object,
     allowedFileTypes: Array<string>,
-    chunkSize?: number
+    chunkSize?: number,
+    chunkMinSize?: number,
+    chunkRetries?: number,
+    sortable?: boolean,
+    fileListTheme?: 'list' | 'gallery',
 }
 
 export default HuplyOptionsInterface;

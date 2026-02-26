@@ -29,14 +29,28 @@ class FileListComponent {
         });
     }
 
+    private isGallery(): boolean {
+        return this.store.options.fileListTheme === 'gallery';
+    }
+
     render(): HTMLElement {
+        if (this.isGallery()) {
+            return this.renderGallery();
+        }
+
         const li = this.getListEl();
+
+        // Drag handle (only when sortable is enabled)
+        if (this.store.options.sortable) {
+            li.appendChild(this.getDragHandle());
+        }
 
         // Image or icon
         li.appendChild(this.getVisual())
 
         // Description
         const descriptionEl = document.createElement('div');
+        descriptionEl.classList.add('huply-file-item-description');
 
         // Generate name tag
         descriptionEl.appendChild(this.getHeadline());
@@ -51,6 +65,24 @@ class FileListComponent {
 
         this.listElement = li;
 
+        return li;
+    }
+
+    private renderGallery(): HTMLElement {
+        const li = this.getListEl();
+        li.appendChild(this.getVisual());
+
+        const overlayEl = document.createElement('div');
+        overlayEl.classList.add('huply-file-item-gallery-overlay');
+
+        const progressEl = document.createElement('span');
+        progressEl.classList.add('huply-file-item-gallery-progress');
+        overlayEl.appendChild(progressEl);
+
+        overlayEl.appendChild(this.getDeleteAction());
+        li.appendChild(overlayEl);
+
+        this.listElement = li;
         return li;
     }
 
@@ -89,6 +121,16 @@ class FileListComponent {
     }
 
     updateSubline(fileItem: FileItemInterface) {
+        if (this.isGallery()) {
+            const progressEl = this.listElement?.querySelector('.huply-file-item-gallery-progress');
+            if (progressEl) {
+                progressEl.textContent = fileItem.status === 'uploading' && fileItem.uploadProcess
+                    ? `${fileItem.uploadProcess.toFixed(0)}%`
+                    : '';
+            }
+            return;
+        }
+
         const sublineEl = this.listElement.querySelector('.huply-file-item-subline');
         if (sublineEl) {
             if (fileItem.status === 'uploading') {
@@ -120,6 +162,13 @@ class FileListComponent {
         if(headline) {
             headline.textContent = fileItem.name;
         }
+    }
+
+    getDragHandle(): HTMLElement {
+        const handleEl = document.createElement('div');
+        handleEl.classList.add('huply-file-item-drag-handle');
+        handleEl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 16"><circle cx="3" cy="2" r="1.5"/><circle cx="7" cy="2" r="1.5"/><circle cx="3" cy="6" r="1.5"/><circle cx="7" cy="6" r="1.5"/><circle cx="3" cy="10" r="1.5"/><circle cx="7" cy="10" r="1.5"/></svg>';
+        return handleEl;
     }
 
     getVisual(): HTMLElement {

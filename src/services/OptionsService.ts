@@ -19,7 +19,9 @@ export default class OptionsService {
             uploadUrl: '',
             deleteUrl: '',
             allowedFileTypes: ['.jpg', '.jpeg', '.png', '.pdf', '.zip', '.mp4'],
-            dropzoneTheme: 'lg'
+            dropzoneTheme: 'lg',
+            sortable: false,
+            fileListTheme: 'list'
         };
 
         // Merge default options with individual options
@@ -88,6 +90,15 @@ export default class OptionsService {
         const chunkSize = this.el?.getAttribute('data-chunk-size');
         if(chunkSize) {
             defaultOptions.chunkSize = Number(chunkSize);
+        }
+
+        if(this.el?.hasAttribute('data-sortable')) {
+            defaultOptions.sortable = this.el.getAttribute('data-sortable') !== 'false';
+        }
+
+        const fileListTheme = this.el?.getAttribute('data-file-list-theme');
+        if (fileListTheme) {
+            defaultOptions.fileListTheme = fileListTheme as 'list' | 'gallery';
         }
 
         return defaultOptions;

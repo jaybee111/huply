@@ -120,6 +120,19 @@ class AppStore {
         return this.files.filter((item) => item.status === 'uploading');
     }
 
+    reorderFiles(orderedIds: string[]) {
+        const ordered: FileItemInterface[] = [];
+        orderedIds.forEach(id => {
+            const file = this.files.find(f => f.id === id);
+            if (file) ordered.push(file);
+        });
+        this.files.forEach(file => {
+            if (!orderedIds.includes(file.id)) ordered.push(file);
+        });
+        this.files = ordered;
+        this.events.publish('filesReordered', this.files);
+    }
+
     setComponent(key: string, component: FileListComponent | FileDropzoneComponent | FileDropzoneSmallComponent | Node) {
         // @ts-ignore
         this.components[key] = component;

@@ -18,7 +18,10 @@ export default class UploadService {
                 fileItem.uploadProcess = 0;
                 this.store.updateFileItem(fileItem);
 
-                if(this.store.options.chunkSize) {
+                const fileSizeBytes = fileItem.size ?? 0;
+                const minBytes = (this.store.options.chunkMinSize ?? 0) * 1024 * 1024;
+                const useChunked = this.store.options.chunkSize && fileSizeBytes >= minBytes;
+                if (useChunked) {
                     this.sendChunkedFile(fileItem, 0);
                 } else {
                     this.sendFile(fileItem);
@@ -27,7 +30,8 @@ export default class UploadService {
         }
     }
 
-    sendChunkedFile(fileItem: FileItemInterface, start: number) {
+    sendChunkedFile(fileItem: FileItemInterface, start: number, retryCount = 0) {
+        const maxRetries = this.store.options.chunkRetries ?? 3;
 
         if(this.store.options.chunkSize && fileItem.size && fileItem.data) {
             // Slicing file
@@ -65,6 +69,20 @@ export default class UploadService {
                         this.sendChunkedFile(fileItem, nextSlice);
                     }
 
+                } else {
+                    if (retryCount < maxRetries) {
+                        this.sendChunkedFile(fileItem, start, retryCount + 1);
+                    } else {
+                        fileItem.status = 'error';
+                        this.store.updateFileItem(fileItem);
+                        this.upload();
+                    }
+                }
+            });
+
+            request.addEventListener('error', () => {
+                if (retryCount < maxRetries) {
+                    this.sendChunkedFile(fileItem, start, retryCount + 1);
                 } else {
                     fileItem.status = 'error';
                     this.store.updateFileItem(fileItem);
