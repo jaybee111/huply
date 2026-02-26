@@ -3,6 +3,10 @@
   "type": "module",
   "description": "A dependency-free JavaScript-Tool for uploading files.",
   "version": "0.4.6",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jaybee111/huply"
+  },
   "files": [
     "dist"
   ],
