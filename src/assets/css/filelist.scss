@@ -228,6 +228,7 @@
     background: rgba(0, 0, 0, 0.45);
     opacity: 0;
     transition: opacity 200ms ease;
+    pointer-events: none;
 
     .huply-file-item-gallery-progress {
       color: #fff;
@@ -236,6 +237,7 @@
     }
 
     .huply-file-item-actions-delete {
+      pointer-events: auto;
       width: 35px;
       height: 35px;
       padding: 10px;

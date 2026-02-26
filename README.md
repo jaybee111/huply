@@ -297,12 +297,6 @@ const options = {
 new Huply(el, options).init();
 ```
 
-Can also be set via data-attribute:
-
-```
-<input type="file" multiple data-sortable="true" ... />
-```
-
 #### fileListTheme
 
 Sets the layout of the file list. Use `'gallery'` to display files as a square-thumbnail grid. On hover (and during upload) a semi-transparent overlay with a delete button and upload progress appears. Defaults to `'list'`.
@@ -316,12 +310,6 @@ const options = {
   ...
 };
 new Huply(el, options).init();
-```
-
-Can also be set via data-attribute:
-
-```
-<input type="file" multiple data-file-list-theme="gallery" ... />
 ```
 
 ### Data-attributes

@@ -97,6 +97,9 @@ class AppStore {
             uploaded: this.getFilesUploaded(),
             preloaded: this.getFilesPreloaded(),
             deleted: this.getFilesDeleted(),
+            order: this.files
+                .filter(f => f.status !== 'deleted')
+                .map(f => ({ id: f.id, name: f.name, status: f.status })),
         };
     }
 
