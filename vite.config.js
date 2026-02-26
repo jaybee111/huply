@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import eslintPlugin from 'vite-plugin-eslint';
+import eslintPlugin from 'vite-plugin-eslint2';
 import { resolve } from 'path'
 // import { peerDependencies, dependencies } from './package.json'
 

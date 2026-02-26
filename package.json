@@ -1,5 +1,6 @@
 {
   "name": "huply",
+  "type": "module",
   "description": "A dependency-free JavaScript-Tool for uploading files.",
   "version": "0.4.1",
   "files": [
@@ -24,11 +25,13 @@
     "release-major": "npm version major && git push origin master && git push --tags"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@typescript-eslint/parser": "^8.56.1",
     "eslint": "^10.0.2",
+    "globals": "^17.3.0",
     "sass": "^1.49.7",
     "typescript": "^4.5.4",
     "vite": "^7.3.1",
-    "vite-plugin-eslint": "^1.3.0"
+    "vite-plugin-eslint2": "^5.0.5"
   }
 }

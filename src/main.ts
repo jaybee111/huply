@@ -11,7 +11,6 @@ import OptionsService from "./services/OptionsService";
 import PreloadedFileItemInterface from "./interfaces/PreloadedFileItemInterface";
 declare let window: CustomWindowInterface;
 
-// eslint-disable-next-line no-unused-vars
 export default class Huply {
 
     public options?: HuplyOptionsInterface;
