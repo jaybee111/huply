@@ -17,6 +17,10 @@ class FileInputHiddenComponent {
         store.events.subscribe('fileDeleted', () => {
             this.input.setAttribute('value', this.getValue());
         });
+
+        store.events.subscribe('filesReordered', () => {
+            this.input.setAttribute('value', this.getValue());
+        });
     }
 
     render(): HTMLInputElement {
