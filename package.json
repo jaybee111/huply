@@ -2,7 +2,7 @@
   "name": "huply",
   "type": "module",
   "description": "A dependency-free JavaScript-Tool for uploading files.",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "files": [
     "dist"
   ],
